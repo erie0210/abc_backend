@@ -12,6 +12,7 @@ export declare class UsersController {
     signUp(body: UserRequestDto): Promise<import("./users.schema").Users>;
     refresh(req: any, res: Response, body: any): Promise<string>;
     getOneUser(body: UserRequestDto): Promise<import("./users.schema").Users>;
+    getUser(id: any): Promise<import("./users.schema").Users>;
     logIn(req: any, res: Response, data: LoginRequestDto): Promise<{
         user: import("./users.schema").Users;
         token: string;
@@ -19,4 +20,5 @@ export declare class UsersController {
         hashedToken: string;
     }>;
     logOut(): Promise<string>;
+    updateUser(id: any, body: any): Promise<import("./users.schema").Users>;
 }

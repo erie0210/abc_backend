@@ -46,4 +46,33 @@ export class UsersService {
     const { id } = body;
     return this.usersRepository.findUserById(id);
   }
+
+  async getUser(id: string) {
+    return this.usersRepository.findUserById(id);
+  }
+
+  async updateUser(id: string, body) {
+    try {
+      const { nickname, passwd } = body;
+
+      if (passwd === '') {
+        body = { nickname: nickname };
+        console.log('update nickname only');
+      } else if (nickname === '') {
+        const hashedPassword = await bcrypt.hash(passwd, 10);
+        body = { passwd: hashedPassword };
+        console.log('update passwd only');
+      } else {
+        const hashedPassword = await bcrypt.hash(passwd, 10);
+        body = {
+          nickname: nickname,
+          passwd: hashedPassword,
+        };
+        console.log('update nickname and passwd');
+      }
+      return await this.usersRepository.update(id, body);
+    } catch (error) {
+      console.warn(error);
+    }
+  }
 }

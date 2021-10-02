@@ -6,4 +6,6 @@ export declare class UsersService {
     constructor(usersRepository: UsersRepository);
     signUp(body: UserRequestDto): Promise<Users>;
     getOneUser(body: UserRequestDto): Promise<Users>;
+    getUser(id: string): Promise<Users>;
+    updateUser(id: string, body: any): Promise<Users>;
 }

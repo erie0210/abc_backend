@@ -55,6 +55,14 @@ let UsersRepository = class UsersRepository {
         });
         return res;
     }
+    async update(id, body) {
+        try {
+            return await this.userModel.findByIdAndUpdate(id, body, { new: true });
+        }
+        catch (error) {
+            console.warn(error);
+        }
+    }
 };
 UsersRepository = __decorate([
     (0, common_1.Injectable)(),

@@ -50,8 +50,11 @@ let UsersController = class UsersController {
             return 'Refresh Token Validaion Error';
         }
     }
-    getOneUser(body) {
+    async getOneUser(body) {
         return this.usersService.getOneUser(body);
+    }
+    async getUser(id) {
+        return this.usersService.getUser(id);
     }
     async logIn(req, res, data) {
         const { user, token, refreshToken, hashedToken } = await this.authService.jwtLogIn(data);
@@ -60,6 +63,9 @@ let UsersController = class UsersController {
     }
     async logOut() {
         return 'logout';
+    }
+    async updateUser(id, body) {
+        return await this.usersService.updateUser(id, body);
     }
 };
 __decorate([
@@ -108,8 +114,19 @@ __decorate([
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [users_request_dto_1.UserRequestDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], UsersController.prototype, "getOneUser", null);
+__decorate([
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+    }),
+    (0, swagger_1.ApiOperation)({ summary: '특정 유저 정보 가져오기- 유저 정보 업데이트' }),
+    (0, common_1.Get)('/update/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "getUser", null);
 __decorate([
     (0, swagger_1.ApiResponse)({
         status: 500,
@@ -135,6 +152,24 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "logOut", null);
+__decorate([
+    (0, swagger_1.ApiResponse)({
+        status: 500,
+        description: '회원 정보 수정 Server Error...',
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: '회원 정보 수정 성공',
+        type: user_dto_1.ReadOnlyUserDto,
+    }),
+    (0, swagger_1.ApiOperation)({ summary: '회원 정보 수정' }),
+    (0, common_1.Patch)('/update/:userId'),
+    __param(0, (0, common_1.Param)('userId')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "updateUser", null);
 UsersController = __decorate([
     (0, common_1.Controller)('users'),
     (0, common_1.UseInterceptors)(success_interceptor_1.SuccessInterceptor),
