@@ -54,9 +54,9 @@ let UsersController = class UsersController {
         return this.usersService.getOneUser(body);
     }
     async logIn(req, res, data) {
-        const { token, refreshToken, hashedToken } = await this.authService.jwtLogIn(data);
+        const { user, token, refreshToken, hashedToken } = await this.authService.jwtLogIn(data);
         res.cookie('Refresh', hashedToken);
-        return { token, refreshToken, hashedToken };
+        return { user, token, refreshToken, hashedToken };
     }
     async logOut() {
         return 'logout';

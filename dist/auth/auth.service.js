@@ -26,24 +26,29 @@ let AuthService = class AuthService {
         const { email, passwd } = data;
         const user = await this.usersRepository.findUserByEmail(email);
         if (!user) {
-            throw new common_1.UnauthorizedException('이메일과 비밀번호를 확인해주세요.');
+            throw new common_1.UnauthorizedException('해당하는 이메일이 없습니다');
         }
         const isPasswordValidated = await bcrypt.compare(passwd, user.passwd);
         if (!isPasswordValidated) {
-            throw new common_1.UnauthorizedException('이메일과 비밀번호를 확인해주세요');
+            throw new common_1.UnauthorizedException('이메일과 비밀번호가 일치하지 않습니다.');
         }
-        const payload = { email: email, sub: user.id };
-        const token = this.jwtService.sign(payload, {
-            secret: 'secretKey',
-            expiresIn: '7200000s',
-        });
-        const refreshToken = this.jwtService.sign(payload, {
-            secret: 'secretKey',
-            expiresIn: '7200000s',
-        });
-        const res = await this.setCurrentRefreshToken(user.id, refreshToken);
-        const hashedToken = res;
-        return { token, refreshToken, hashedToken };
+        try {
+            const payload = { email: email, sub: user.id };
+            const token = this.jwtService.sign(payload, {
+                secret: 'secretKey',
+                expiresIn: '7200000s',
+            });
+            const refreshToken = this.jwtService.sign(payload, {
+                secret: 'secretKey',
+                expiresIn: '7200000s',
+            });
+            const res = await this.setCurrentRefreshToken(user.id, refreshToken);
+            const hashedToken = res;
+            return { user, token, refreshToken, hashedToken };
+        }
+        catch (error) {
+            throw new common_1.BadRequestException('로그인 중 에러가 발생하였습니다.');
+        }
     }
     async getAccessToken(payload) {
         const token = this.jwtService.sign(payload, {
