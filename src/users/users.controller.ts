@@ -107,10 +107,10 @@ export class UsersController {
     @Res({ passthrough: true }) res: Response,
     @Body() data: LoginRequestDto,
   ) {
-    const { token, refreshToken, hashedToken } =
+    const { user, token, refreshToken, hashedToken } =
       await this.authService.jwtLogIn(data);
     res.cookie('Refresh', hashedToken);
-    return { token, refreshToken, hashedToken };
+    return { user, token, refreshToken, hashedToken };
   }
 
   //* 로그아웃은 JWT를 프론트에서 제거하면 된다...?!

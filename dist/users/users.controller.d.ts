@@ -13,6 +13,7 @@ export declare class UsersController {
     refresh(req: any, res: Response, body: any): Promise<string>;
     getOneUser(body: UserRequestDto): Promise<import("./users.schema").Users>;
     logIn(req: any, res: Response, data: LoginRequestDto): Promise<{
+        user: import("./users.schema").Users;
         token: string;
         refreshToken: string;
         hashedToken: string;

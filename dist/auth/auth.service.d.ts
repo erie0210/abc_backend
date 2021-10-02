@@ -9,6 +9,7 @@ export declare class AuthService {
     private configService;
     constructor(usersRepository: UsersRepository, jwtService: JwtService, configService: ConfigService);
     jwtLogIn(data: LoginRequestDto): Promise<{
+        user: import("../users/users.schema").Users;
         token: string;
         refreshToken: string;
         hashedToken: string;

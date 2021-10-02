@@ -1,6 +1,10 @@
 import * as bcrypt from 'bcrypt';
 
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { compare, hash } from 'bcrypt';
 
 import { ConfigService } from '@nestjs/config';
@@ -24,7 +28,7 @@ export class AuthService {
     //* 해당하는 이메일이 있는 지 check
     const user = await this.usersRepository.findUserByEmail(email);
     if (!user) {
-      throw new UnauthorizedException('이메일과 비밀번호를 확인해주세요.');
+      throw new UnauthorizedException('해당하는 이메일이 없습니다');
     }
     //* password가 일치하는 지 check
     const isPasswordValidated: boolean = await bcrypt.compare(
@@ -32,22 +36,25 @@ export class AuthService {
       user.passwd,
     );
     if (!isPasswordValidated) {
-      throw new UnauthorizedException('이메일과 비밀번호를 확인해주세요');
+      throw new UnauthorizedException('이메일과 비밀번호가 일치하지 않습니다.');
     }
 
-    const payload = { email: email, sub: user.id };
-
-    const token = this.jwtService.sign(payload, {
-      secret: 'secretKey',
-      expiresIn: '7200000s',
-    });
-    const refreshToken = this.jwtService.sign(payload, {
-      secret: 'secretKey',
-      expiresIn: '7200000s',
-    });
-    const res = await this.setCurrentRefreshToken(user.id, refreshToken);
-    const hashedToken = res;
-    return { token, refreshToken, hashedToken };
+    try {
+      const payload = { email: email, sub: user.id };
+      const token = this.jwtService.sign(payload, {
+        secret: 'secretKey',
+        expiresIn: '7200000s',
+      });
+      const refreshToken = this.jwtService.sign(payload, {
+        secret: 'secretKey',
+        expiresIn: '7200000s',
+      });
+      const res = await this.setCurrentRefreshToken(user.id, refreshToken);
+      const hashedToken = res;
+      return { user, token, refreshToken, hashedToken };
+    } catch (error) {
+      throw new BadRequestException('로그인 중 에러가 발생하였습니다.');
+    }
   }
 
   async getAccessToken(payload: Payload) {
