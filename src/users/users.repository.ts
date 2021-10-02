@@ -53,4 +53,12 @@ export class UsersRepository {
     });
     return res;
   }
+
+  async update(id: string, body) {
+    try {
+      return await this.userModel.findByIdAndUpdate(id, body);
+    } catch (error) {
+      console.warn(error);
+    }
+  }
 }

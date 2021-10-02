@@ -46,4 +46,16 @@ export class UsersService {
     const { id } = body;
     return this.usersRepository.findUserById(id);
   }
+
+  async getUser(id: string) {
+    return this.usersRepository.findUserById(id);
+  }
+
+  async updateUser(id: string, body) {
+    try {
+      return await this.usersRepository.update(id, body);
+    } catch (error) {
+      console.warn(error);
+    }
+  }
 }

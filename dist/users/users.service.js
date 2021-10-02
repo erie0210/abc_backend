@@ -40,6 +40,17 @@ let UsersService = class UsersService {
         const { id } = body;
         return this.usersRepository.findUserById(id);
     }
+    async getUser(id) {
+        return this.usersRepository.findUserById(id);
+    }
+    async updateUser(id, body) {
+        try {
+            return await this.usersRepository.update(id, body);
+        }
+        catch (error) {
+            console.warn(error);
+        }
+    }
 };
 UsersService = __decorate([
     (0, common_1.Injectable)(),

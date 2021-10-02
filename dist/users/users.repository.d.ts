@@ -11,4 +11,5 @@ export declare class UsersRepository {
     existsByEmail(email: string): Promise<boolean>;
     create(user: UserRequestDto): Promise<Users>;
     updateRefreshToken(id: string, token: string): Promise<Users>;
+    update(id: string, body: any): Promise<Users>;
 }

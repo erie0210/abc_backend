@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Param,
+  Patch,
   Post,
   Req,
   Res,
@@ -88,8 +89,18 @@ export class UsersController {
   @ApiOperation({ summary: '특정 유저 정보 가져오기' })
   @UseGuards(JwtAuthGuard) //*인증처리
   @Get(':id')
-  getOneUser(@Body() body: UserRequestDto) {
+  async getOneUser(@Body() body: UserRequestDto) {
     return this.usersService.getOneUser(body);
+  }
+
+  @ApiResponse({
+    status: 200,
+  })
+  @ApiOperation({ summary: '특정 유저 정보 가져오기- 유저 정보 업데이트' })
+  // @UseGuards(JwtAuthGuard) //*인증처리
+  @Get('/update/:id')
+  async getUser(@Param('id') id) {
+    return this.usersService.getUser(id);
   }
 
   @ApiResponse({
@@ -118,5 +129,23 @@ export class UsersController {
   @Post('logout')
   async logOut() {
     return 'logout';
+  }
+
+  // * 유저 정보 수정
+  @ApiResponse({
+    status: 500,
+    description: '회원 정보 수정 Server Error...',
+  })
+  @ApiResponse({
+    status: 200,
+    description: '회원 정보 수정 성공',
+    type: ReadOnlyUserDto,
+  })
+  // * JWT 설정하기
+  @ApiOperation({ summary: '회원 정보 수정' })
+  @Patch('/update/:userId')
+  async updateUser(@Param('userId') id, @Body() body) {
+    // console.log(id, body);
+    return await this.usersService.updateUser(id, body);
   }
 }
