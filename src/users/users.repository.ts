@@ -61,4 +61,12 @@ export class UsersRepository {
       console.warn(error);
     }
   }
+
+  async deleteUser(id: string) {
+    try {
+      return await this.userModel.findByIdAndDelete(id);
+    } catch (error) {
+      console.warn(error);
+    }
+  }
 }

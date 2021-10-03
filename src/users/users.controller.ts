@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
@@ -147,5 +148,22 @@ export class UsersController {
   async updateUser(@Param('userId') id, @Body() body) {
     // console.log(id, body);
     return await this.usersService.updateUser(id, body);
+  }
+
+  // * 탈퇴하기
+  @ApiResponse({
+    status: 500,
+    description: '탈퇴하기 Server Error...',
+  })
+  @ApiResponse({
+    status: 200,
+    description: '탈퇴하기 성공',
+    type: ReadOnlyUserDto,
+  })
+  // * JWT 설정하기
+  @ApiOperation({ summary: '탈퇴하기' })
+  @Delete(':id')
+  async deleteUser(@Param('id') id) {
+    return await this.usersService.deleteUser(id);
   }
 }

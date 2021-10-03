@@ -69,6 +69,9 @@ let UsersService = class UsersService {
             console.warn(error);
         }
     }
+    async deleteUser(id) {
+        return this.usersRepository.deleteUser(id);
+    }
 };
 UsersService = __decorate([
     (0, common_1.Injectable)(),

@@ -67,6 +67,9 @@ let UsersController = class UsersController {
     async updateUser(id, body) {
         return await this.usersService.updateUser(id, body);
     }
+    async deleteUser(id) {
+        return await this.usersService.deleteUser(id);
+    }
 };
 __decorate([
     (0, swagger_1.ApiResponse)({
@@ -170,6 +173,23 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "updateUser", null);
+__decorate([
+    (0, swagger_1.ApiResponse)({
+        status: 500,
+        description: '탈퇴하기 Server Error...',
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: '탈퇴하기 성공',
+        type: user_dto_1.ReadOnlyUserDto,
+    }),
+    (0, swagger_1.ApiOperation)({ summary: '탈퇴하기' }),
+    (0, common_1.Delete)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "deleteUser", null);
 UsersController = __decorate([
     (0, common_1.Controller)('users'),
     (0, common_1.UseInterceptors)(success_interceptor_1.SuccessInterceptor),
