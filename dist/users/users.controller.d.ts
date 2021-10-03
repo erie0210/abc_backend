@@ -21,4 +21,5 @@ export declare class UsersController {
     }>;
     logOut(): Promise<string>;
     updateUser(id: any, body: any): Promise<import("./users.schema").Users>;
+    deleteUser(id: any): Promise<import("./users.schema").Users>;
 }

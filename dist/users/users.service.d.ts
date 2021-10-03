@@ -8,4 +8,5 @@ export declare class UsersService {
     getOneUser(body: UserRequestDto): Promise<Users>;
     getUser(id: string): Promise<Users>;
     updateUser(id: string, body: any): Promise<Users>;
+    deleteUser(id: string): Promise<Users>;
 }

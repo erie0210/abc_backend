@@ -75,4 +75,8 @@ export class UsersService {
       console.warn(error);
     }
   }
+
+  async deleteUser(id: string) {
+    return this.usersRepository.deleteUser(id);
+  }
 }

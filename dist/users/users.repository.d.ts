@@ -12,4 +12,5 @@ export declare class UsersRepository {
     create(user: UserRequestDto): Promise<Users>;
     updateRefreshToken(id: string, token: string): Promise<Users>;
     update(id: string, body: any): Promise<Users>;
+    deleteUser(id: string): Promise<Users>;
 }

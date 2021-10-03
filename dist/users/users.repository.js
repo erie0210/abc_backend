@@ -63,6 +63,14 @@ let UsersRepository = class UsersRepository {
             console.warn(error);
         }
     }
+    async deleteUser(id) {
+        try {
+            return await this.userModel.findByIdAndDelete(id);
+        }
+        catch (error) {
+            console.warn(error);
+        }
+    }
 };
 UsersRepository = __decorate([
     (0, common_1.Injectable)(),
