@@ -57,7 +57,7 @@ let UsersRepository = class UsersRepository {
     }
     async update(id, body) {
         try {
-            return await this.userModel.findByIdAndUpdate(id, body);
+            return await this.userModel.findByIdAndUpdate(id, body, { new: true });
         }
         catch (error) {
             console.warn(error);
