@@ -16,6 +16,7 @@ import { RecipeService } from './recipe/recipe.service';
 import { RecipesController } from './recipe/recipe.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './users/users.module';
+import { BakeryModule } from './bakery/bakery.module';
 
 @Module({
   imports: [
@@ -44,6 +45,7 @@ import { UserModule } from './users/users.module';
     BakeriesModule,
     AuthModule,
     CommentsModule,
+    BakeryModule,
   ],
   controllers: [AppController, RecipesController],
   providers: [AppService, RecipeService],
