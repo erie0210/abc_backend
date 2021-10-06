@@ -22,6 +22,7 @@ const recipe_modules_1 = require("./recipe/recipe.modules");
 const recipe_service_1 = require("./recipe/recipe.service");
 const recipe_controller_1 = require("./recipe/recipe.controller");
 const users_module_1 = require("./users/users.module");
+const bakery_module_1 = require("./bakery/bakery.module");
 let AppModule = class AppModule {
     constructor() {
         this.isDev = process.env.MODE === 'dev' ? true : false;
@@ -49,6 +50,7 @@ AppModule = __decorate([
             bakeries_module_1.BakeriesModule,
             auth_module_1.AuthModule,
             comments_module_1.CommentsModule,
+            bakery_module_1.BakeryModule,
         ],
         controllers: [app_controller_1.AppController, recipe_controller_1.RecipesController],
         providers: [app_service_1.AppService, recipe_service_1.RecipeService],
