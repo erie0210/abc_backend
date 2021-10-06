@@ -19,13 +19,14 @@ let BakeryModule = class BakeryModule {
 BakeryModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            mongoose_1.MongooseModule.forFeature([{ name: bakery_schema_1.Bakery.name, schema: bakery_schema_1.BakerySchema }]),
             mongoose_1.MongooseModule.forFeature([
+                { name: bakery_schema_1.Bakery.name, schema: bakery_schema_1.BakerySchema },
                 { name: comments_schema_1.Comments.name, schema: comments_schema_1.CommentsSchema },
             ]),
         ],
         controllers: [bakery_controller_1.BakeryController],
         providers: [bakery_service_1.BakeryService, bakery_repository_1.BakeryRepository],
+        exports: [bakery_repository_1.BakeryRepository],
     })
 ], BakeryModule);
 exports.BakeryModule = BakeryModule;

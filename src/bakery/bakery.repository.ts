@@ -13,13 +13,14 @@ export class BakeryRepository {
     @InjectModel(Bakery.name) private readonly bakeryModel: Model<Bakery>,
   ) {}
 
-  async findAll() {
+  async findAll(page) {
     const CommentsModel = mongoose.model('comments', CommentsSchema);
     const UsersModel = mongoose.model('users', UserSchema);
     return await this.bakeryModel
       .find()
       .populate('comments', CommentsModel)
       .populate('users', UsersModel)
+      .limit(page * 10)
       .sort('createdAt');
   }
 

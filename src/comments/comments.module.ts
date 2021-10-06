@@ -1,7 +1,9 @@
+import { Bakery, BakerySchema } from 'src/bakery/bakery.schema';
 import { Comments, CommentsSchema } from './comments.schema';
 import { Recipe, RecipeSchema } from 'src/recipe/recipe.schema';
 import { UserSchema, Users } from 'src/users/users.schema';
 
+import { BakeryRepository } from 'src/bakery/bakery.repository';
 import { CommentsController } from './comments.controller';
 import { CommentsService } from './comments.service';
 import { Module } from '@nestjs/common';
@@ -16,12 +18,13 @@ import { UserModule } from 'src/users/users.module';
       { name: Comments.name, schema: CommentsSchema },
       { name: Recipe.name, schema: RecipeSchema },
       { name: Users.name, schema: UserSchema },
+      { name: Bakery.name, schema: BakerySchema },
     ]),
     RecipeModule,
     UserModule,
   ],
   controllers: [CommentsController],
-  providers: [CommentsService, RecipeRepository],
-  exports: [CommentsService, RecipeRepository],
+  providers: [CommentsService, RecipeRepository, BakeryRepository],
+  exports: [CommentsService],
 })
 export class CommentsModule {}

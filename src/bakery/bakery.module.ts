@@ -9,12 +9,13 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: Bakery.name, schema: BakerySchema }]),
     MongooseModule.forFeature([
+      { name: Bakery.name, schema: BakerySchema },
       { name: Comments.name, schema: CommentsSchema },
     ]),
   ],
   controllers: [BakeryController],
   providers: [BakeryService, BakeryRepository],
+  exports: [BakeryRepository],
 })
 export class BakeryModule {}

@@ -25,6 +25,9 @@ let CommentsController = class CommentsController {
     async saveComment(id, body) {
         return this.commentsService.saveComment(id, body);
     }
+    async saveBakeryComment(id, body) {
+        return this.commentsService.saveBakeryComment(id, body);
+    }
     async getComment(id) {
         return this.commentsService.findComment(id);
     }
@@ -43,6 +46,17 @@ __decorate([
     __metadata("design:paramtypes", [String, comments_create_dto_1.CommentsCreateDto]),
     __metadata("design:returntype", Promise)
 ], CommentsController.prototype, "saveComment", null);
+__decorate([
+    (0, swagger_1.ApiOperation)({
+        summary: '특정 베이커리 글에 댓글 남기기',
+    }),
+    (0, common_1.Post)('/bakery/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, comments_create_dto_1.CommentsCreateDto]),
+    __metadata("design:returntype", Promise)
+], CommentsController.prototype, "saveBakeryComment", null);
 __decorate([
     (0, swagger_1.ApiOperation)({
         summary: '댓글 하나 가져오기',

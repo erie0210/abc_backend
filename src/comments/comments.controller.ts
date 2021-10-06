@@ -21,6 +21,18 @@ export class CommentsController {
   }
 
   @ApiOperation({
+    summary: '특정 베이커리 글에 댓글 남기기',
+  })
+  // @UseGuards(JwtAuthGuard)
+  @Post('/bakery/:id')
+  async saveBakeryComment(
+    @Param('id') id: string, // * 글 ID
+    @Body() body: CommentsCreateDto, // * {author의 userId, contents}
+  ) {
+    return this.commentsService.saveBakeryComment(id, body);
+  }
+
+  @ApiOperation({
     summary: '댓글 하나 가져오기',
   })
   // @UseGuards(JwtAuthGuard)

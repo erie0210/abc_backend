@@ -16,9 +16,9 @@ let BakeryService = class BakeryService {
     constructor(bakeryRepository) {
         this.bakeryRepository = bakeryRepository;
     }
-    async getAllBakery() {
+    async getAllBakery(page) {
         try {
-            return await this.bakeryRepository.findAll();
+            return await this.bakeryRepository.findAll(page);
         }
         catch (error) {
             console.warn(error);

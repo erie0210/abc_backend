@@ -19,11 +19,13 @@ const common_1 = require("@nestjs/common");
 const mongoose_2 = require("mongoose");
 const recipe_repository_1 = require("../recipe/recipe.repository");
 const users_repository_1 = require("../users/users.repository");
+const bakery_repository_1 = require("../bakery/bakery.repository");
 let CommentsService = class CommentsService {
-    constructor(commentsModel, recipeRepository, usersRepository) {
+    constructor(commentsModel, recipeRepository, usersRepository, bakeryRepository) {
         this.commentsModel = commentsModel;
         this.recipeRepository = recipeRepository;
         this.usersRepository = usersRepository;
+        this.bakeryRepository = bakeryRepository;
     }
     async createComment(id, commentData) {
         try {
@@ -31,6 +33,23 @@ let CommentsService = class CommentsService {
         }
         catch (error) {
             console.warn(error);
+        }
+    }
+    async saveBakeryComment(id, commentData) {
+        try {
+            const target = await this.bakeryRepository.findOne(id);
+            const { author, contents } = commentData;
+            const validateAuthor = await this.usersRepository.findUserByIdWithoutPassword(author);
+            const newComment = new this.commentsModel({
+                author: validateAuthor.id,
+                name: validateAuthor.nickname,
+                contents,
+                info: target._id,
+            });
+            return await newComment.save();
+        }
+        catch (error) {
+            throw new common_1.BadRequestException(error.message);
         }
     }
     async saveComment(id, commentData) {
@@ -72,7 +91,8 @@ CommentsService = __decorate([
     __param(0, (0, mongoose_1.InjectModel)(comments_schema_1.Comments.name)),
     __metadata("design:paramtypes", [mongoose_2.Model,
         recipe_repository_1.RecipeRepository,
-        users_repository_1.UsersRepository])
+        users_repository_1.UsersRepository,
+        bakery_repository_1.BakeryRepository])
 ], CommentsService);
 exports.CommentsService = CommentsService;
 //# sourceMappingURL=comments.service.js.map

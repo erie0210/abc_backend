@@ -24,13 +24,14 @@ let BakeryRepository = class BakeryRepository {
     constructor(bakeryModel) {
         this.bakeryModel = bakeryModel;
     }
-    async findAll() {
+    async findAll(page) {
         const CommentsModel = mongoose.model('comments', comments_schema_1.CommentsSchema);
         const UsersModel = mongoose.model('users', users_schema_1.UserSchema);
         return await this.bakeryModel
             .find()
             .populate('comments', CommentsModel)
             .populate('users', UsersModel)
+            .limit(page * 10)
             .sort('createdAt');
     }
     async findOne(id) {

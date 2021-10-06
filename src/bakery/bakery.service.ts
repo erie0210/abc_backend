@@ -6,9 +6,9 @@ import { Injectable } from '@nestjs/common';
 export class BakeryService {
   constructor(private readonly bakeryRepository: BakeryRepository) {}
 
-  async getAllBakery() {
+  async getAllBakery(page) {
     try {
-      return await this.bakeryRepository.findAll();
+      return await this.bakeryRepository.findAll(page);
     } catch (error) {
       console.warn(error);
     }
