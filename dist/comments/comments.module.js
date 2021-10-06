@@ -7,9 +7,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CommentsModule = void 0;
+const bakery_schema_1 = require("../bakery/bakery.schema");
 const comments_schema_1 = require("./comments.schema");
 const recipe_schema_1 = require("../recipe/recipe.schema");
 const users_schema_1 = require("../users/users.schema");
+const bakery_repository_1 = require("../bakery/bakery.repository");
 const comments_controller_1 = require("./comments.controller");
 const comments_service_1 = require("./comments.service");
 const common_1 = require("@nestjs/common");
@@ -26,13 +28,14 @@ CommentsModule = __decorate([
                 { name: comments_schema_1.Comments.name, schema: comments_schema_1.CommentsSchema },
                 { name: recipe_schema_1.Recipe.name, schema: recipe_schema_1.RecipeSchema },
                 { name: users_schema_1.Users.name, schema: users_schema_1.UserSchema },
+                { name: bakery_schema_1.Bakery.name, schema: bakery_schema_1.BakerySchema },
             ]),
             recipe_modules_1.RecipeModule,
             users_module_1.UserModule,
         ],
         controllers: [comments_controller_1.CommentsController],
-        providers: [comments_service_1.CommentsService, recipe_repository_1.RecipeRepository],
-        exports: [comments_service_1.CommentsService, recipe_repository_1.RecipeRepository],
+        providers: [comments_service_1.CommentsService, recipe_repository_1.RecipeRepository, bakery_repository_1.BakeryRepository],
+        exports: [comments_service_1.CommentsService],
     })
 ], CommentsModule);
 exports.CommentsModule = CommentsModule;

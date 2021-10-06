@@ -15,9 +15,9 @@ import { BakeryRequestDto } from './dto/bakery.request.dto';
 export class BakeryController {
   constructor(private readonly bakeryService: BakeryService) {}
 
-  @Get('/')
-  async getAllBakery() {
-    return await this.bakeryService.getAllBakery();
+  @Get(':page')
+  async getAllBakery(@Param('page') page) {
+    return await this.bakeryService.getAllBakery(page);
   }
 
   @Get(':id')

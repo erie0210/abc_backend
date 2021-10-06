@@ -4,7 +4,7 @@ import { BakeryRequestDto } from './dto/bakery.request.dto';
 export declare class BakeryRepository {
     private readonly bakeryModel;
     constructor(bakeryModel: Model<Bakery>);
-    findAll(): Promise<Bakery[]>;
+    findAll(page: any): Promise<Bakery[]>;
     findOne(id: string): Promise<Bakery>;
     create(bakery: BakeryRequestDto): Promise<Bakery>;
     update(id: string, data: any): Promise<Bakery>;

@@ -20,8 +20,8 @@ let BakeryController = class BakeryController {
     constructor(bakeryService) {
         this.bakeryService = bakeryService;
     }
-    async getAllBakery() {
-        return await this.bakeryService.getAllBakery();
+    async getAllBakery(page) {
+        return await this.bakeryService.getAllBakery(page);
     }
     async getOneBakery(id) {
         return await this.bakeryService.getOneBakery(id);
@@ -37,9 +37,10 @@ let BakeryController = class BakeryController {
     }
 };
 __decorate([
-    (0, common_1.Get)('/'),
+    (0, common_1.Get)(':page'),
+    __param(0, (0, common_1.Param)('page')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], BakeryController.prototype, "getAllBakery", null);
 __decorate([
