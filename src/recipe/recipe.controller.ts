@@ -37,7 +37,7 @@ export class RecipesController {
     status: 200,
   })
   @ApiOperation({ summary: 'Public Recipe 전체 가져오기' })
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Get('/public/:page/:sort')
   async getPublicRecipe(@Param('page') page, @Param('sort') sort) {
     this.logger.verbose(`User A trying to get all public recipes`);
@@ -107,7 +107,7 @@ export class RecipesController {
     status: 200,
   })
   @ApiOperation({ summary: '특정 Recipe 가져오기' })
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Get('/:id')
   async getOneRecipe(@Param('id') id) {
     return await this.recipeService.getRecipe(id);
@@ -160,8 +160,8 @@ export class RecipesController {
   @ApiOperation({
     summary: '좋아요 수 올리기',
   })
-  @UseGuards(JwtAuthGuard)
-  @Patch(':id')
+  // @UseGuards(JwtAuthGuard)
+  @Patch('/plus/:id')
   async plusLike(@Param('id') id: string) {
     return this.recipeService.plusLike(id);
   }
@@ -169,7 +169,7 @@ export class RecipesController {
   @ApiOperation({
     summary: '좋아요 수 줄이기',
   })
-  @Patch(':id')
+  @Patch('/minus/:id')
   async minusLike(@Param('id') id: string) {
     return this.recipeService.minusLike(id);
   }
