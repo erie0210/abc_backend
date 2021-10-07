@@ -152,7 +152,6 @@ __decorate([
         description: 'Recipe 생성 성공!',
     }),
     (0, swagger_1.ApiOperation)({ summary: 'Recipe 생성' }),
-    (0, common_1.UseGuards)(jwt_guard_1.JwtAuthGuard),
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),

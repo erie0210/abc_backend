@@ -123,7 +123,7 @@ export class RecipesController {
     description: 'Recipe 생성 성공!',
   })
   @ApiOperation({ summary: 'Recipe 생성' })
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Post()
   async createRecipe(@Body() data: RecipeRequestDto) {
     return await this.recipeService.createRecipe(data);
