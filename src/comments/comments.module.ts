@@ -25,7 +25,12 @@ import { UserModule } from 'src/users/users.module';
     UserModule,
   ],
   controllers: [CommentsController],
-  providers: [CommentsService, RecipeRepository, BakeryRepository],
+  providers: [
+    CommentsService,
+    CommentsRepository,
+    RecipeRepository,
+    BakeryRepository,
+  ],
   exports: [CommentsService, CommentsRepository],
 })
 export class CommentsModule {}

@@ -35,7 +35,12 @@ CommentsModule = __decorate([
             users_module_1.UserModule,
         ],
         controllers: [comments_controller_1.CommentsController],
-        providers: [comments_service_1.CommentsService, recipe_repository_1.RecipeRepository, bakery_repository_1.BakeryRepository],
+        providers: [
+            comments_service_1.CommentsService,
+            comments_repository_1.CommentsRepository,
+            recipe_repository_1.RecipeRepository,
+            bakery_repository_1.BakeryRepository,
+        ],
         exports: [comments_service_1.CommentsService, comments_repository_1.CommentsRepository],
     })
 ], CommentsModule);
