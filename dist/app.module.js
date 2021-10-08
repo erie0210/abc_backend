@@ -12,18 +12,17 @@ const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const auth_module_1 = require("./auth/auth.module");
-const bakeries_module_1 = require("./bakeries/bakeries.module");
+const bakery_module_1 = require("./bakery/bakery.module");
 const calculators_module_1 = require("./calculators/calculators.module");
 const comments_module_1 = require("./comments/comments.module");
 const config_1 = require("@nestjs/config");
+const likes_module_1 = require("./likes/likes.module");
 const logger_middleware_1 = require("./common/middlewares/logger.middleware");
 const mongoose_1 = require("@nestjs/mongoose");
 const recipe_modules_1 = require("./recipe/recipe.modules");
 const recipe_service_1 = require("./recipe/recipe.service");
 const recipe_controller_1 = require("./recipe/recipe.controller");
 const users_module_1 = require("./users/users.module");
-const bakery_module_1 = require("./bakery/bakery.module");
-const likes_module_1 = require("./likes/likes.module");
 let AppModule = class AppModule {
     constructor() {
         this.isDev = process.env.MODE === 'dev' ? true : false;
@@ -48,7 +47,6 @@ AppModule = __decorate([
             recipe_modules_1.RecipeModule,
             users_module_1.UserModule,
             calculators_module_1.CalculatorsModule,
-            bakeries_module_1.BakeriesModule,
             auth_module_1.AuthModule,
             comments_module_1.CommentsModule,
             bakery_module_1.BakeryModule,

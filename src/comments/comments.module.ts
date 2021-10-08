@@ -5,6 +5,7 @@ import { UserSchema, Users } from 'src/users/users.schema';
 
 import { BakeryRepository } from 'src/bakery/bakery.repository';
 import { CommentsController } from './comments.controller';
+import { CommentsRepository } from './comments.repository';
 import { CommentsService } from './comments.service';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -25,6 +26,6 @@ import { UserModule } from 'src/users/users.module';
   ],
   controllers: [CommentsController],
   providers: [CommentsService, RecipeRepository, BakeryRepository],
-  exports: [CommentsService],
+  exports: [CommentsService, CommentsRepository],
 })
 export class CommentsModule {}
