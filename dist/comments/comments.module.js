@@ -13,6 +13,7 @@ const recipe_schema_1 = require("../recipe/recipe.schema");
 const users_schema_1 = require("../users/users.schema");
 const bakery_repository_1 = require("../bakery/bakery.repository");
 const comments_controller_1 = require("./comments.controller");
+const comments_repository_1 = require("./comments.repository");
 const comments_service_1 = require("./comments.service");
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
@@ -35,7 +36,7 @@ CommentsModule = __decorate([
         ],
         controllers: [comments_controller_1.CommentsController],
         providers: [comments_service_1.CommentsService, recipe_repository_1.RecipeRepository, bakery_repository_1.BakeryRepository],
-        exports: [comments_service_1.CommentsService],
+        exports: [comments_service_1.CommentsService, comments_repository_1.CommentsRepository],
     })
 ], CommentsModule);
 exports.CommentsModule = CommentsModule;

@@ -5,10 +5,11 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
-import { BakeriesModule } from './bakeries/bakeries.module';
+import { BakeryModule } from './bakery/bakery.module';
 import { CalculatorsModule } from './calculators/calculators.module';
 import { CommentsModule } from './comments/comments.module';
 import { ConfigModule } from '@nestjs/config';
+import { LikesModule } from './likes/likes.module';
 import { LoggerMiddleware } from 'src/common/middlewares/logger.middleware';
 import { MongooseModule } from '@nestjs/mongoose';
 import { RecipeModule } from './recipe/recipe.modules';
@@ -16,8 +17,6 @@ import { RecipeService } from './recipe/recipe.service';
 import { RecipesController } from './recipe/recipe.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './users/users.module';
-import { BakeryModule } from './bakery/bakery.module';
-import { LikesModule } from './likes/likes.module';
 
 @Module({
   imports: [
@@ -43,7 +42,6 @@ import { LikesModule } from './likes/likes.module';
     RecipeModule,
     UserModule,
     CalculatorsModule,
-    BakeriesModule,
     AuthModule,
     CommentsModule,
     BakeryModule,
