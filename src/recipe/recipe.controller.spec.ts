@@ -1,14 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { Recipe } from './recipe.schema';
+import { RecipesController } from './recipe.controller';
 import { RecipeRepository } from './recipe.repository';
 import { RecipeService } from './recipe.service';
-import { RecipesController } from './recipe.controller';
 import { getModelToken } from '@nestjs/mongoose';
 
-const recipe: Recipe[] = [];
-
-describe('RecipeService', () => {
+describe('RecipeController', () => {
+  let controller: RecipesController;
   let service: RecipeService;
   let repository: RecipeRepository;
 
@@ -17,18 +16,17 @@ describe('RecipeService', () => {
       providers: [
         RecipeService,
         RecipeRepository,
-        {
-          provide: getModelToken(Recipe.name),
-          useFactory: () => {},
-        },
+        { provide: getModelToken(Recipe.name), useFactory: () => {} },
       ],
+      controllers: [RecipesController],
     }).compile();
 
-    service = await module.get<RecipeService>(RecipeService);
     repository = await module.get<RecipeRepository>(RecipeRepository);
+    service = await module.get<RecipeService>(RecipeService);
+    controller = await module.get<RecipesController>(RecipesController);
   });
 
   it('should be defined', () => {
-    expect(service).toBeDefined();
+    expect(controller).toBeDefined();
   });
 });
