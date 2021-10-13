@@ -18,27 +18,83 @@ const options: SchemaOptions = {
 
 @Schema(options)
 export class Bakery extends Document {
-  @Prop({ required: true })
+  @ApiProperty({
+    description: '빵집 이름',
+    required: true,
+    example: '',
+  })
+  @Prop({
+    type: String,
+    required: true,
+  })
+  @IsNotEmpty()
   @IsString()
   title: string;
 
-  @Prop({ required: true, default: 0 })
+  @ApiProperty({
+    description: '조회수',
+    required: true,
+    example: '234',
+  })
+  @Prop({
+    type: Number,
+    required: true,
+    default: 0,
+  })
+  @IsNotEmpty()
   @IsNumber()
   view: number;
 
-  @Prop({ required: true, default: 0 })
+  @ApiProperty({
+    description: '좋아요 수',
+    required: true,
+    example: '12',
+  })
+  @Prop({
+    type: Number,
+    required: true,
+    default: 0,
+  })
+  @IsNotEmpty()
   @IsNumber()
   likes: number;
 
-  @Prop({ required: true })
+  @ApiProperty({
+    description: '베이커리에 대한 설명',
+    required: true,
+    example: '',
+  })
+  @Prop({
+    type: String,
+    required: true,
+  })
+  @IsNotEmpty()
   @IsString()
   body: string;
 
-  @Prop({ required: true })
+  @ApiProperty({
+    description: '베이커리에 대한 설명',
+    required: true,
+    example: '',
+  })
+  @Prop({
+    type: String,
+    required: true,
+  })
+  @IsNotEmpty()
   @IsString()
   picture: string;
 
-  @Prop({ required: true })
+  @ApiProperty({
+    description: '베이커리에 대한 설명',
+    required: true,
+    example: '',
+  })
+  @Prop({
+    type: String,
+    required: true,
+  })
+  @IsNotEmpty()
   @IsString()
   author: string;
 }

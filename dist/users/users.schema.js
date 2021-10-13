@@ -25,7 +25,10 @@ __decorate([
         required: true,
         example: 'abc@gmail.com',
     }),
-    (0, mongoose_2.Prop)({ required: true }),
+    (0, mongoose_2.Prop)({
+        type: String,
+        required: true,
+    }),
     (0, class_validator_1.IsEmail)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
@@ -36,7 +39,10 @@ __decorate([
         required: true,
         example: 'abc',
     }),
-    (0, mongoose_2.Prop)({ required: true }),
+    (0, mongoose_2.Prop)({
+        type: String,
+        required: true,
+    }),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
@@ -47,7 +53,10 @@ __decorate([
         required: true,
         example: 'nick',
     }),
-    (0, mongoose_2.Prop)({ required: true }),
+    (0, mongoose_2.Prop)({
+        type: String,
+        required: true,
+    }),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
@@ -58,6 +67,7 @@ __decorate([
         example: 'abc.jpg',
     }),
     (0, mongoose_2.Prop)({
+        type: String,
         default: 'https://job.csj.ac.kr/assets/images/contents/no-img.png',
     }),
     __metadata("design:type", String)
@@ -67,6 +77,7 @@ __decorate([
         description: 'current hashed refreshToken',
     }),
     (0, mongoose_2.Prop)({
+        type: String,
         default: '',
     }),
     __metadata("design:type", String)
@@ -77,6 +88,7 @@ __decorate([
         example: '0',
     }),
     (0, mongoose_2.Prop)({
+        type: Number,
         default: 0,
     }),
     __metadata("design:type", Number)
