@@ -11,17 +11,36 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LikesSchema = exports.Likes = void 0;
 const mongoose_1 = require("mongoose");
-const mongoose_2 = require("@nestjs/mongoose");
 const class_validator_1 = require("class-validator");
+const mongoose_2 = require("@nestjs/mongoose");
+const swagger_1 = require("@nestjs/swagger");
 let Likes = class Likes extends mongoose_1.Document {
 };
 __decorate([
-    (0, mongoose_2.Prop)({ required: true }),
+    (0, swagger_1.ApiProperty)({
+        description: '좋아요를 누른 사용자 Id',
+        required: true,
+        example: '',
+    }),
+    (0, mongoose_2.Prop)({
+        type: String,
+        required: true,
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], Likes.prototype, "userId", void 0);
 __decorate([
-    (0, mongoose_2.Prop)({ required: true }),
+    (0, swagger_1.ApiProperty)({
+        description: '좋아요를 누를 글 Id',
+        required: true,
+        example: '',
+    }),
+    (0, mongoose_2.Prop)({
+        type: String,
+        required: true,
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], Likes.prototype, "postId", void 0);

@@ -13,38 +13,95 @@ exports.BakerySchema = exports._BakerySchema = exports.Bakery = void 0;
 const mongoose_1 = require("mongoose");
 const class_validator_1 = require("class-validator");
 const mongoose_2 = require("@nestjs/mongoose");
+const swagger_1 = require("@nestjs/swagger");
 const options = {
     timestamps: true,
 };
 let Bakery = class Bakery extends mongoose_1.Document {
 };
 __decorate([
-    (0, mongoose_2.Prop)({ required: true }),
+    (0, swagger_1.ApiProperty)({
+        description: '빵집 이름',
+        required: true,
+        example: '',
+    }),
+    (0, mongoose_2.Prop)({
+        type: String,
+        required: true,
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], Bakery.prototype, "title", void 0);
 __decorate([
-    (0, mongoose_2.Prop)({ required: true, default: 0 }),
+    (0, swagger_1.ApiProperty)({
+        description: '조회수',
+        required: true,
+        example: '234',
+    }),
+    (0, mongoose_2.Prop)({
+        type: Number,
+        required: true,
+        default: 0,
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], Bakery.prototype, "view", void 0);
 __decorate([
-    (0, mongoose_2.Prop)({ required: true, default: 0 }),
+    (0, swagger_1.ApiProperty)({
+        description: '좋아요 수',
+        required: true,
+        example: '12',
+    }),
+    (0, mongoose_2.Prop)({
+        type: Number,
+        required: true,
+        default: 0,
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], Bakery.prototype, "likes", void 0);
 __decorate([
-    (0, mongoose_2.Prop)({ required: true }),
+    (0, swagger_1.ApiProperty)({
+        description: '베이커리에 대한 설명',
+        required: true,
+        example: '',
+    }),
+    (0, mongoose_2.Prop)({
+        type: String,
+        required: true,
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], Bakery.prototype, "body", void 0);
 __decorate([
-    (0, mongoose_2.Prop)({ required: true }),
+    (0, swagger_1.ApiProperty)({
+        description: '베이커리에 대한 설명',
+        required: true,
+        example: '',
+    }),
+    (0, mongoose_2.Prop)({
+        type: String,
+        required: true,
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], Bakery.prototype, "picture", void 0);
 __decorate([
-    (0, mongoose_2.Prop)({ required: true }),
+    (0, swagger_1.ApiProperty)({
+        description: '베이커리에 대한 설명',
+        required: true,
+        example: '',
+    }),
+    (0, mongoose_2.Prop)({
+        type: String,
+        required: true,
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], Bakery.prototype, "author", void 0);

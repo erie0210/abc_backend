@@ -22,7 +22,10 @@ export class Users extends Document {
     required: true,
     example: 'abc@gmail.com',
   })
-  @Prop({ required: true })
+  @Prop({
+    type: String,
+    required: true,
+  })
   @IsEmail()
   @IsNotEmpty()
   email: string;
@@ -32,7 +35,10 @@ export class Users extends Document {
     required: true,
     example: 'abc',
   })
-  @Prop({ required: true })
+  @Prop({
+    type: String,
+    required: true,
+  })
   @IsString()
   @IsNotEmpty()
   passwd: string;
@@ -42,7 +48,10 @@ export class Users extends Document {
     required: true,
     example: 'nick',
   })
-  @Prop({ required: true })
+  @Prop({
+    type: String,
+    required: true,
+  })
   @IsString()
   @IsNotEmpty()
   nickname: string;
@@ -52,6 +61,7 @@ export class Users extends Document {
     example: 'abc.jpg',
   })
   @Prop({
+    type: String,
     default: 'https://job.csj.ac.kr/assets/images/contents/no-img.png',
   })
   picture: string;
@@ -60,6 +70,7 @@ export class Users extends Document {
     description: 'current hashed refreshToken',
   })
   @Prop({
+    type: String,
     default: '',
   })
   refreshToken: string;
@@ -69,6 +80,7 @@ export class Users extends Document {
     example: '0',
   })
   @Prop({
+    type: Number,
     default: 0,
   })
   grant: number;

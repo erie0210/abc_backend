@@ -14,8 +14,6 @@ const mongoose_1 = require("mongoose");
 const class_validator_1 = require("class-validator");
 const mongoose_2 = require("@nestjs/mongoose");
 const swagger_1 = require("@nestjs/swagger");
-const recipe_schema_1 = require("../recipe/recipe.schema");
-const users_schema_1 = require("../users/users.schema");
 const options = {
     timestamps: true,
 };
@@ -25,6 +23,7 @@ __decorate([
     (0, swagger_1.ApiProperty)({
         description: '작성한 유저 id',
         required: true,
+        example: '',
     }),
     (0, mongoose_2.Prop)({
         type: String,
@@ -38,27 +37,35 @@ __decorate([
     (0, swagger_1.ApiProperty)({
         description: '작성한 유저 이름',
         required: true,
+        example: '예시 유저 닉네임',
     }),
     (0, mongoose_2.Prop)({
+        type: String,
         required: true,
     }),
     (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], Comments.prototype, "name", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: '댓글 컨텐츠',
         required: true,
+        example: '예시 컨텐츠',
     }),
-    (0, mongoose_2.Prop)({ required: true }),
-    (0, class_validator_1.IsString)(),
+    (0, mongoose_2.Prop)({
+        type: String,
+        required: true,
+    }),
     (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], Comments.prototype, "contents", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: '작성대상(게시글)',
         required: true,
+        example: '',
     }),
     (0, mongoose_2.Prop)({
         type: mongoose_1.Types.ObjectId,
@@ -73,7 +80,4 @@ Comments = __decorate([
 ], Comments);
 exports.Comments = Comments;
 exports.CommentsSchema = mongoose_2.SchemaFactory.createForClass(Comments);
-exports.CommentsSchema.virtual('readOnlyData').get(function () {
-    return {};
-});
 //# sourceMappingURL=comments.schema.js.map

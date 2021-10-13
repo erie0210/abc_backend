@@ -4,8 +4,6 @@ import {
   IsBoolean,
   IsNotEmpty,
   IsNumber,
-  IsObject,
-  IsPositive,
   IsString,
 } from 'class-validator';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
@@ -18,20 +16,26 @@ const options: SchemaOptions = {
 
 @Schema(options)
 export class Recipe extends Document {
-  // primary key
-  // @Prop({ required: true, unique: true })
-  // @IsNumber()
-  // id: number;
-
-  @Prop({ required: true })
+  @Prop({
+    type: String,
+    required: true,
+  })
+  @IsNotEmpty()
   @IsString()
   title: string;
 
-  @Prop({ required: true })
+  @Prop({
+    type: Boolean,
+    required: true,
+  })
   @IsBoolean()
+  @IsNotEmpty()
   share: boolean;
 
-  @Prop({ required: true })
+  @Prop({
+    type: Number,
+    default: 0,
+  })
   @IsNumber()
   view: number;
 
@@ -40,40 +44,54 @@ export class Recipe extends Document {
     required: true,
   })
   @Prop({
-    required: true,
+    type: Number,
     default: 0,
   })
   @IsNotEmpty()
   likes: number;
 
-  @Prop({ required: true })
+  @Prop({
+    type: String,
+    default: '',
+  })
   @IsString()
   contents: string;
 
-  @Prop({ required: true })
+  @Prop({
+    type: Array,
+    default: ['https://i.stack.imgur.com/y9DpT.jpg'],
+  })
   @IsArray()
   pictures: Array<String>;
 
-  @Prop({ required: true })
+  @Prop({
+    type: Number,
+    required: true,
+    default: 3,
+  })
   @IsNumber()
   star: number;
 
-  @Prop({ required: true })
+  @Prop({
+    type: Array,
+    required: true,
+  })
   @IsArray()
   ingredients: Array<Object>;
 
-  @Prop({ required: true })
+  @Prop({
+    type: Array,
+    required: true,
+  })
   @IsArray()
   nutrition: Array<Object>;
 
-  // foreign key
-  @Prop({ required: true })
+  @Prop({
+    type: String,
+    required: true,
+  })
   @IsString()
   author: string;
-
-  // @Prop({ required: true })
-  // @IsNumber()
-  // author_id: number;
 }
 
 const _RecipeSchema = SchemaFactory.createForClass(Recipe);
@@ -87,12 +105,3 @@ _RecipeSchema.set('toObject', { virtuals: true });
 _RecipeSchema.set('toJSON', { virtuals: true });
 
 export const RecipeSchema = _RecipeSchema;
-
-// export const RecipeSchema = SchemaFactory.createForClass(Recipe).index({
-//   title: 'text',
-//   comments: 'text',
-//   contents: 'text',
-//   ingredients: 'text',
-//   nutrition: 'text',
-//   author: 'text',
-// });
