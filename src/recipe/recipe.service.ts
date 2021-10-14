@@ -1,4 +1,5 @@
 // import { Recipe, RecipeType } from './model';
+
 import { Request, Response } from 'express';
 
 import { Injectable } from '@nestjs/common';
@@ -21,19 +22,19 @@ export class RecipeService {
   }
 
   //* 특정 user의 모든 recipes 캐싱
-  async cachePrivateRecipe(userId: string) {
-    const category = ['star', 'title', 'likes', 'createdAt'];
-    const privateCache = {};
-    for (let i = 0; i < category.length; i++) {
-      const result = await this.recipeRepository.findByUser(
-        userId,
-        1,
-        category[i],
-      );
-      privateCache[category[i]] = result;
-    }
-    return privateCache;
-  }
+  // async cachePrivateRecipe(userId: string) {
+  //   const category = ['star', 'title', 'likes', 'createdAt'];
+  //   const privateCache = {};
+  //   for (let i = 0; i < category.length; i++) {
+  //     const result = await this.recipeRepository.findByUser(
+  //       userId,
+  //       1,
+  //       category[i],
+  //     );
+  //     privateCache[category[i]] = result;
+  //   }
+  //   return privateCache;
+  // }
 
   //* 특정 user의 모든 recipes
   async privateRecipe(category: string, userId: string, page: number) {

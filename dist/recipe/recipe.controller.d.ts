@@ -6,7 +6,6 @@ export declare class RecipesController {
     constructor(recipeService: RecipeService);
     getPublicRecipe(page: any, sort: any): Promise<import("./recipe.schema").Recipe[]>;
     search(body: any): Promise<import("./recipe.schema").Recipe[]>;
-    getPrivateCacheRecipe(userId: any): Promise<{}>;
     getPrivateRecipe(category: any, userId: any, page: any): Promise<import("./recipe.schema").Recipe[]>;
     getOneRecipe(id: any): Promise<import("./recipe.schema").Recipe>;
     createRecipe(data: RecipeRequestDto): Promise<import("./recipe.schema").Recipe>;

@@ -8,7 +8,7 @@ import { getModelToken } from '@nestjs/mongoose';
 
 const recipe: Recipe[] = [];
 
-describe('RecipeService', () => {
+describe('레시피 서비스 테스트', () => {
   let service: RecipeService;
   let repository: RecipeRepository;
 
@@ -28,7 +28,7 @@ describe('RecipeService', () => {
     repository = await module.get<RecipeRepository>(RecipeRepository);
   });
 
-  it('should be defined', () => {
+  it('should be defined', async () => {
     expect(service).toBeDefined();
   });
 });

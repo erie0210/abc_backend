@@ -41,7 +41,8 @@ export class RecipesController {
   @Get('/public/:page/:sort')
   async getPublicRecipe(@Param('page') page, @Param('sort') sort) {
     this.logger.verbose(`User A trying to get all public recipes`);
-    return await this.recipeService.publicRecipe(page, sort);
+    const res_controller = await this.recipeService.publicRecipe(page, sort);
+    return res_controller;
   }
 
   //* 검색하기
@@ -63,20 +64,20 @@ export class RecipesController {
   }
 
   //* 특정 유저의 레시피 캐싱
-  @ApiResponse({
-    status: 500,
-    description: '특정 user의 Recipe 캐싱 Server Error...',
-  })
-  @ApiResponse({
-    status: 200,
-    description: '특정 user의 Recipe 캐싱 성공',
-  })
-  @ApiOperation({ summary: '특정 user의 recipe 전체 가져오기' })
-  @UseGuards(JwtAuthGuard)
-  @Get('/private/:id')
-  async getPrivateCacheRecipe(@Param('id') userId) {
-    return await this.recipeService.cachePrivateRecipe(userId);
-  }
+  // @ApiResponse({
+  //   status: 500,
+  //   description: '특정 user의 Recipe 캐싱 Server Error...',
+  // })
+  // @ApiResponse({
+  //   status: 200,
+  //   description: '특정 user의 Recipe 캐싱 성공',
+  // })
+  // @ApiOperation({ summary: '특정 user의 recipe 전체 가져오기' })
+  // @UseGuards(JwtAuthGuard)
+  // @Get('/private/:id')
+  // async getPrivateCacheRecipe(@Param('id') userId) {
+  //   return await this.recipeService.cachePrivateRecipe(userId);
+  // }
 
   //* 특정 유저의 특정 레시피 모두 가져오기
   @ApiResponse({

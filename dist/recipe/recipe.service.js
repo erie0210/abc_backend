@@ -24,15 +24,6 @@ let RecipeService = class RecipeService {
             console.warn(error);
         }
     }
-    async cachePrivateRecipe(userId) {
-        const category = ['star', 'title', 'likes', 'createdAt'];
-        const privateCache = {};
-        for (let i = 0; i < category.length; i++) {
-            const result = await this.recipeRepository.findByUser(userId, 1, category[i]);
-            privateCache[category[i]] = result;
-        }
-        return privateCache;
-    }
     async privateRecipe(category, userId, page) {
         try {
             return await this.recipeRepository.findByUser(userId, page, category);
