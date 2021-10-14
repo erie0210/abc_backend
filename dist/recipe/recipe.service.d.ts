@@ -5,7 +5,6 @@ export declare class RecipeService {
     private readonly recipeRepository;
     constructor(recipeRepository: RecipeRepository);
     publicRecipe(page: number, sort: string): Promise<Recipe[]>;
-    cachePrivateRecipe(userId: string): Promise<{}>;
     privateRecipe(category: string, userId: string, page: number): Promise<Recipe[]>;
     searchRecipe(keyword: string, page: number, sort: string): Promise<Recipe[]>;
     getRecipe(id: string): Promise<Recipe>;

@@ -28,11 +28,13 @@ let RecipeRepository = class RecipeRepository {
         const sortBy = new Object();
         sortBy[sort] = 'asc';
         const CommentsModel = mongoose.model('comments', comments_schema_1.CommentsSchema);
-        return await this.recipeModel
+        const res = await this.recipeModel
             .find({ share: true })
             .populate('comments', CommentsModel)
             .limit(10 * page)
             .sort(sortBy);
+        console.log('res in repo', res);
+        return res;
     }
     async findById(id) {
         const CommentsModel = mongoose.model('comments', comments_schema_1.CommentsSchema);

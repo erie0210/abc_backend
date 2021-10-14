@@ -21,12 +21,14 @@ export class RecipeRepository {
 
     const CommentsModel = mongoose.model('comments', CommentsSchema);
 
-    return await this.recipeModel
+    const res = await this.recipeModel
       .find({ share: true })
       .populate('comments', CommentsModel)
       .limit(10 * page)
       // .skip((page - 1) * 10)
       .sort(sortBy);
+    console.log('res in repo', res);
+    return res;
   }
 
   async findById(id: string) {

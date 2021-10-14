@@ -27,15 +27,13 @@ let RecipesController = class RecipesController {
     }
     async getPublicRecipe(page, sort) {
         this.logger.verbose(`User A trying to get all public recipes`);
-        return await this.recipeService.publicRecipe(page, sort);
+        const res_controller = await this.recipeService.publicRecipe(page, sort);
+        return res_controller;
     }
     async search(body) {
         const { keyword, page, sort } = body;
         const res = await this.recipeService.searchRecipe(keyword, page, sort);
         return res;
-    }
-    async getPrivateCacheRecipe(userId) {
-        return await this.recipeService.cachePrivateRecipe(userId);
     }
     async getPrivateRecipe(category, userId, page) {
         return await this.recipeService.privateRecipe(category, userId, page);
@@ -92,23 +90,6 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], RecipesController.prototype, "search", null);
-__decorate([
-    (0, swagger_1.ApiResponse)({
-        status: 500,
-        description: '특정 user의 Recipe 캐싱 Server Error...',
-    }),
-    (0, swagger_1.ApiResponse)({
-        status: 200,
-        description: '특정 user의 Recipe 캐싱 성공',
-    }),
-    (0, swagger_1.ApiOperation)({ summary: '특정 user의 recipe 전체 가져오기' }),
-    (0, common_1.UseGuards)(jwt_guard_1.JwtAuthGuard),
-    (0, common_1.Get)('/private/:id'),
-    __param(0, (0, common_1.Param)('id')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], RecipesController.prototype, "getPrivateCacheRecipe", null);
 __decorate([
     (0, swagger_1.ApiResponse)({
         status: 500,
