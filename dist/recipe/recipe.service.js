@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RecipeService = void 0;
+const mongoose_1 = require("mongoose");
 const common_1 = require("@nestjs/common");
 const recipe_repository_1 = require("./recipe.repository");
 let RecipeService = class RecipeService {
@@ -21,7 +22,8 @@ let RecipeService = class RecipeService {
             return await this.recipeRepository.findPublic(page, sort);
         }
         catch (error) {
-            console.warn(error);
+            console.log('branch2', error);
+            throw new mongoose_1.Error(error);
         }
     }
     async privateRecipe(category, userId, page) {
@@ -88,9 +90,9 @@ let RecipeService = class RecipeService {
     }
     async plusLike(id) {
         try {
-            const comment = await this.recipeRepository.findById(id);
-            comment.likes += 1;
-            return await comment.save();
+            const recipe = await this.recipeRepository.findById(id);
+            recipe.likes += 1;
+            return await recipe.save();
         }
         catch (error) {
             console.warn(error);
@@ -98,9 +100,9 @@ let RecipeService = class RecipeService {
     }
     async minusLike(id) {
         try {
-            const comment = await this.recipeRepository.findById(id);
-            comment.likes -= 1;
-            return await comment.save();
+            const recipe = await this.recipeRepository.findById(id);
+            recipe.likes -= 1;
+            return await recipe.save();
         }
         catch (error) {
             console.warn(error);

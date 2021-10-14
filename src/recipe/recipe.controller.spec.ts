@@ -7,7 +7,7 @@ import { RecipesController } from './recipe.controller';
 import axios from 'axios';
 import { getModelToken } from '@nestjs/mongoose';
 
-describe('RecipeController', () => {
+describe('Recipe Controller 테스트', () => {
   let controller: RecipesController;
   let service: RecipeService;
   let repository: RecipeRepository;

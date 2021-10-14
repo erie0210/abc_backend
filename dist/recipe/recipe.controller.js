@@ -20,6 +20,7 @@ const recipe_service_1 = require("./recipe.service");
 const success_interceptor_1 = require("../common/interceptors/success.interceptor");
 const recipe_request_dto_1 = require("./dto/recipe.request.dto");
 const jwt_guard_1 = require("../auth/jwt/jwt.guard");
+const mongoose_1 = require("mongoose");
 let RecipesController = class RecipesController {
     constructor(recipeService) {
         this.recipeService = recipeService;
@@ -27,8 +28,13 @@ let RecipesController = class RecipesController {
     }
     async getPublicRecipe(page, sort) {
         this.logger.verbose(`User A trying to get all public recipes`);
-        const res_controller = await this.recipeService.publicRecipe(page, sort);
-        return res_controller;
+        try {
+            return await this.recipeService.publicRecipe(page, sort);
+        }
+        catch (error) {
+            console.log('controller error', error);
+            throw new mongoose_1.Error(error);
+        }
     }
     async search(body) {
         const { keyword, page, sort } = body;

@@ -20,6 +20,8 @@ import { SuccessInterceptor } from 'src/common/interceptors/success.interceptor'
 import { RecipeRequestDto } from './dto/recipe.request.dto';
 import { RecipeDto } from './dto/recipe.dto';
 import { JwtAuthGuard } from 'src/auth/jwt/jwt.guard';
+import { catchError } from 'rxjs';
+import { Error } from 'mongoose';
 
 @Controller('recipes')
 @UseInterceptors(SuccessInterceptor)
@@ -41,8 +43,12 @@ export class RecipesController {
   @Get('/public/:page/:sort')
   async getPublicRecipe(@Param('page') page, @Param('sort') sort) {
     this.logger.verbose(`User A trying to get all public recipes`);
-    const res_controller = await this.recipeService.publicRecipe(page, sort);
-    return res_controller;
+    try {
+      return await this.recipeService.publicRecipe(page, sort);
+    } catch (error) {
+      console.log('controller error', error);
+      throw new Error(error);
+    }
   }
 
   //* 검색하기

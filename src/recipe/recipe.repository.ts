@@ -21,13 +21,14 @@ export class RecipeRepository {
 
     const CommentsModel = mongoose.model('comments', CommentsSchema);
 
+    if (page < 1) {
+      throw new Error('page should be positive integer');
+    }
     const res = await this.recipeModel
       .find({ share: true })
       .populate('comments', CommentsModel)
       .limit(10 * page)
-      // .skip((page - 1) * 10)
       .sort(sortBy);
-    console.log('res in repo', res);
     return res;
   }
 

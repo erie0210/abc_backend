@@ -2,6 +2,7 @@
 
 import { Request, Response } from 'express';
 
+import { Error } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { Recipe } from './recipe.schema';
 import { RecipeDto } from './dto/recipe.dto';
@@ -17,7 +18,8 @@ export class RecipeService {
     try {
       return await this.recipeRepository.findPublic(page, sort);
     } catch (error) {
-      console.warn(error);
+      console.log('branch2', error);
+      throw new Error(error);
     }
   }
 
@@ -120,9 +122,9 @@ export class RecipeService {
   // * 좋아요 증가
   async plusLike(id: string) {
     try {
-      const comment = await this.recipeRepository.findById(id);
-      comment.likes += 1;
-      return await comment.save();
+      const recipe = await this.recipeRepository.findById(id);
+      recipe.likes += 1;
+      return await recipe.save();
     } catch (error) {
       console.warn(error);
     }
@@ -131,9 +133,9 @@ export class RecipeService {
   // * 좋아요 감소
   async minusLike(id: string) {
     try {
-      const comment = await this.recipeRepository.findById(id);
-      comment.likes -= 1;
-      return await comment.save();
+      const recipe = await this.recipeRepository.findById(id);
+      recipe.likes -= 1;
+      return await recipe.save();
     } catch (error) {
       console.warn(error);
     }
