@@ -18,7 +18,6 @@ export class RecipeService {
     try {
       return await this.recipeRepository.findPublic(page, sort);
     } catch (error) {
-      console.log('branch2', error);
       throw new Error(error);
     }
   }
@@ -43,7 +42,7 @@ export class RecipeService {
     try {
       return await this.recipeRepository.findByUser(userId, page, category);
     } catch (error) {
-      console.warn(error);
+      throw new Error(error);
     }
   }
 
@@ -52,7 +51,8 @@ export class RecipeService {
     try {
       return await this.recipeRepository.findByKeyword(keyword, page, sort);
     } catch (error) {
-      console.warn(error);
+      // console.warn(error);
+      throw new Error(error);
     }
   }
 
@@ -61,7 +61,7 @@ export class RecipeService {
     try {
       return await this.recipeRepository.findById(id);
     } catch (error) {
-      console.warn(error);
+      throw new Error(error);
     }
   }
 
@@ -106,7 +106,7 @@ export class RecipeService {
       const res = await this.recipeRepository.update(id, data);
       return res;
     } catch (error) {
-      console.warn(error);
+      throw new Error(error);
     }
   }
 
@@ -115,7 +115,7 @@ export class RecipeService {
     try {
       return await this.recipeRepository.delete(id);
     } catch (error) {
-      console.warn(error);
+      throw new Error(error);
     }
   }
 
@@ -126,7 +126,7 @@ export class RecipeService {
       recipe.likes += 1;
       return await recipe.save();
     } catch (error) {
-      console.warn(error);
+      throw new Error(error);
     }
   }
 
@@ -137,7 +137,7 @@ export class RecipeService {
       recipe.likes -= 1;
       return await recipe.save();
     } catch (error) {
-      console.warn(error);
+      throw new Error(error);
     }
   }
 }

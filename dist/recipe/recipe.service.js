@@ -22,7 +22,6 @@ let RecipeService = class RecipeService {
             return await this.recipeRepository.findPublic(page, sort);
         }
         catch (error) {
-            console.log('branch2', error);
             throw new mongoose_1.Error(error);
         }
     }
@@ -31,7 +30,7 @@ let RecipeService = class RecipeService {
             return await this.recipeRepository.findByUser(userId, page, category);
         }
         catch (error) {
-            console.warn(error);
+            throw new mongoose_1.Error(error);
         }
     }
     async searchRecipe(keyword, page, sort) {
@@ -39,7 +38,7 @@ let RecipeService = class RecipeService {
             return await this.recipeRepository.findByKeyword(keyword, page, sort);
         }
         catch (error) {
-            console.warn(error);
+            throw new mongoose_1.Error(error);
         }
     }
     async getRecipe(id) {
@@ -47,7 +46,7 @@ let RecipeService = class RecipeService {
             return await this.recipeRepository.findById(id);
         }
         catch (error) {
-            console.warn(error);
+            throw new mongoose_1.Error(error);
         }
     }
     async createRecipe(body) {
@@ -77,7 +76,7 @@ let RecipeService = class RecipeService {
             return res;
         }
         catch (error) {
-            console.warn(error);
+            throw new mongoose_1.Error(error);
         }
     }
     async deleteRecipe(id) {
@@ -85,7 +84,7 @@ let RecipeService = class RecipeService {
             return await this.recipeRepository.delete(id);
         }
         catch (error) {
-            console.warn(error);
+            throw new mongoose_1.Error(error);
         }
     }
     async plusLike(id) {
@@ -95,7 +94,7 @@ let RecipeService = class RecipeService {
             return await recipe.save();
         }
         catch (error) {
-            console.warn(error);
+            throw new mongoose_1.Error(error);
         }
     }
     async minusLike(id) {
@@ -105,7 +104,7 @@ let RecipeService = class RecipeService {
             return await recipe.save();
         }
         catch (error) {
-            console.warn(error);
+            throw new mongoose_1.Error(error);
         }
     }
 };
