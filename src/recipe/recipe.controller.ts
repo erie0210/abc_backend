@@ -14,7 +14,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 
-import { HttpExceptionFilter } from 'src/common/exceptions/http-exception.filter';
+// import { HttpExceptionFilter } from 'src/common/exceptions/http-exception.filter';
 import { RecipeService } from './recipe.service';
 import { SuccessInterceptor } from 'src/common/interceptors/success.interceptor';
 import { RecipeRequestDto } from './dto/recipe.request.dto';
@@ -25,7 +25,7 @@ import { Error } from 'mongoose';
 
 @Controller('recipes')
 @UseInterceptors(SuccessInterceptor)
-@UseFilters(HttpExceptionFilter)
+// @UseFilters(HttpExceptionFilter)
 export class RecipesController {
   private logger = new Logger('RecipeController');
   constructor(private readonly recipeService: RecipeService) {}
@@ -46,7 +46,6 @@ export class RecipesController {
     try {
       return await this.recipeService.publicRecipe(page, sort);
     } catch (error) {
-      console.log('controller error', error);
       throw new Error(error);
     }
   }

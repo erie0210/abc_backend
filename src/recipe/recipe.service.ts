@@ -18,31 +18,16 @@ export class RecipeService {
     try {
       return await this.recipeRepository.findPublic(page, sort);
     } catch (error) {
-      throw new Error(error);
+      throw error;
     }
   }
-
-  //* 특정 user의 모든 recipes 캐싱
-  // async cachePrivateRecipe(userId: string) {
-  //   const category = ['star', 'title', 'likes', 'createdAt'];
-  //   const privateCache = {};
-  //   for (let i = 0; i < category.length; i++) {
-  //     const result = await this.recipeRepository.findByUser(
-  //       userId,
-  //       1,
-  //       category[i],
-  //     );
-  //     privateCache[category[i]] = result;
-  //   }
-  //   return privateCache;
-  // }
 
   //* 특정 user의 모든 recipes
   async privateRecipe(category: string, userId: string, page: number) {
     try {
-      return await this.recipeRepository.findByUser(userId, page, category);
+      return await this.recipeRepository.findByUser(category, userId, page);
     } catch (error) {
-      throw new Error(error);
+      throw error;
     }
   }
 
@@ -51,8 +36,7 @@ export class RecipeService {
     try {
       return await this.recipeRepository.findByKeyword(keyword, page, sort);
     } catch (error) {
-      // console.warn(error);
-      throw new Error(error);
+      throw error;
     }
   }
 
@@ -61,7 +45,7 @@ export class RecipeService {
     try {
       return await this.recipeRepository.findById(id);
     } catch (error) {
-      throw new Error(error);
+      throw error;
     }
   }
 
@@ -96,7 +80,7 @@ export class RecipeService {
 
       return recipe;
     } catch (error) {
-      console.warn(error);
+      throw error;
     }
   }
 
@@ -106,7 +90,7 @@ export class RecipeService {
       const res = await this.recipeRepository.update(id, data);
       return res;
     } catch (error) {
-      throw new Error(error);
+      throw error;
     }
   }
 
@@ -115,7 +99,7 @@ export class RecipeService {
     try {
       return await this.recipeRepository.delete(id);
     } catch (error) {
-      throw new Error(error);
+      throw error;
     }
   }
 
@@ -123,10 +107,12 @@ export class RecipeService {
   async plusLike(id: string) {
     try {
       const recipe = await this.recipeRepository.findById(id);
-      recipe.likes += 1;
-      return await recipe.save();
+      if (recipe) {
+        recipe.likes += 1;
+        return await recipe.save();
+      }
     } catch (error) {
-      throw new Error(error);
+      throw error;
     }
   }
 
@@ -134,10 +120,12 @@ export class RecipeService {
   async minusLike(id: string) {
     try {
       const recipe = await this.recipeRepository.findById(id);
-      recipe.likes -= 1;
-      return await recipe.save();
+      if (recipe) {
+        recipe.likes -= 1;
+        return await recipe.save();
+      }
     } catch (error) {
-      throw new Error(error);
+      throw error;
     }
   }
 }
