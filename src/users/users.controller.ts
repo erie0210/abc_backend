@@ -14,7 +14,7 @@ import {
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { HttpExceptionFilter } from 'src/common/exceptions/http-exception.filter';
+// import { HttpExceptionFilter } from 'src/common/exceptions/http-exception.filter';
 import { SuccessInterceptor } from 'src/common/interceptors/success.interceptor';
 import { AuthService } from 'src/auth/auth.service';
 import { LoginRequestDto } from 'src/auth/dto/login.request.dto';
@@ -31,7 +31,7 @@ import { Error } from 'mongoose';
 
 @Controller('users')
 @UseInterceptors(SuccessInterceptor)
-@UseFilters(HttpExceptionFilter)
+// @UseFilters(HttpExceptionFilter)
 export class UsersController {
   constructor(
     private readonly usersService: UsersService,

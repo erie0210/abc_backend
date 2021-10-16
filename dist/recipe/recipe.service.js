@@ -94,7 +94,7 @@ let RecipeService = class RecipeService {
             return await recipe.save();
         }
         catch (error) {
-            throw new mongoose_1.Error(error);
+            console.warn(error);
         }
     }
     async minusLike(id) {
@@ -104,7 +104,7 @@ let RecipeService = class RecipeService {
             return await recipe.save();
         }
         catch (error) {
-            throw new mongoose_1.Error(error);
+            console.warn(error);
         }
     }
 };

@@ -7,7 +7,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 
-import { HttpExceptionFilter } from 'src/common/exceptions/http-exception.filter';
+// import { HttpExceptionFilter } from 'src/common/exceptions/http-exception.filter';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { UserRequestDto } from './dto/users.request.dto';

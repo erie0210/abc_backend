@@ -1,4 +1,4 @@
-import { HttpExceptionFilter } from 'src/common/exceptions/http-exception.filter';
+// import { HttpExceptionFilter } from 'src/common/exceptions/http-exception.filter';
 import { InjectModel } from '@nestjs/mongoose';
 import { HttpException, Injectable } from '@nestjs/common';
 import { Model, Types } from 'mongoose';

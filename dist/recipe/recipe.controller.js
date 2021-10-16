@@ -32,7 +32,6 @@ let RecipesController = class RecipesController {
             return await this.recipeService.publicRecipe(page, sort);
         }
         catch (error) {
-            console.log('controller error', error);
             throw new mongoose_1.Error(error);
         }
     }
