@@ -1,33 +1,22 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Patch,
-  Post,
-  Req,
-  Res,
-  UseFilters,
-  UseGuards,
-  UseInterceptors,
-} from '@nestjs/common';
 import { Request, Response } from 'express';
-import { ApiOperation, ApiResponse } from '@nestjs/swagger';
-// import { HttpExceptionFilter } from 'src/common/exceptions/http-exception.filter';
-import { SuccessInterceptor } from 'src/common/interceptors/success.interceptor';
+import { Error } from 'mongoose';
+import { use } from 'passport';
 import { AuthService } from 'src/auth/auth.service';
 import { LoginRequestDto } from 'src/auth/dto/login.request.dto';
+import { JwtRefreshAuthGuard } from 'src/auth/jwt/jwt-refresh.guard';
 import { JwtAuthGuard } from 'src/auth/jwt/jwt.guard';
+import { CurrentUser } from 'src/common/decorators/user.decorators';
+import { SuccessInterceptor } from 'src/common/interceptors/success.interceptor';
+
+import {
+    Body, Controller, Delete, Get, Param, Patch, Post, Query, Req, Res, UseGuards, UseInterceptors
+} from '@nestjs/common';
+import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+
 import { ReadOnlyUserDto } from './dto/user.dto';
 import { UserRequestDto } from './dto/users.request.dto';
-
-import { UsersService } from './users.service';
-import { CurrentUser } from 'src/common/decorators/user.decorators';
-import { use } from 'passport';
 import { UsersRepository } from './users.repository';
-import { JwtRefreshAuthGuard } from 'src/auth/jwt/jwt-refresh.guard';
-import { Error } from 'mongoose';
+import { UsersService } from './users.service';
 
 @Controller('users')
 @UseInterceptors(SuccessInterceptor)
@@ -36,7 +25,6 @@ export class UsersController {
   constructor(
     private readonly usersService: UsersService,
     private readonly authService: AuthService,
-    private readonly usersRepository: UsersRepository,
   ) {}
 
   @ApiResponse({
@@ -134,20 +122,18 @@ export class UsersController {
 
   // * 유저 정보 수정
   @ApiResponse({
-    status: 500,
-    description: '회원 정보 수정 Server Error...',
-  })
-  @ApiResponse({
     status: 200,
     description: '회원 정보 수정 성공',
     type: ReadOnlyUserDto,
   })
-  // * JWT 설정하기
+  @ApiResponse({
+    status: 500,
+    description: '회원 정보 수정 Server Error...',
+  })
   @ApiOperation({ summary: '회원 정보 수정' })
-  @Patch('/update/:userId')
-  async updateUser(@Param('userId') id, @Body() body) {
-    // console.log(id, body);
-    return await this.usersService.updateUser(id, body);
+  @Patch('/')
+  async updateUser(@Query('userId') userId, @Body() body) {
+    return await this.usersService.updateUser(userId, body);
   }
 
   // * 탈퇴하기
