@@ -66,6 +66,9 @@
 📁 users: 회원 정보에 관한 모듈</br>
 📁 utils</br>
 📁 test: 테스트 폴더</br>
+![Untitled](https://user-images.githubusercontent.com/91591854/141668147-156e1588-2316-4a31-afa8-0738558b2797.png)
+
+
 
 ### 아키텍쳐
 ✨ VPC
@@ -89,6 +92,9 @@
 - AWS API Gateway
 - AWS S3(스토리지)
 - AWS Lambda
+![archi](https://user-images.githubusercontent.com/91591854/141668299-20f22a3d-996f-462b-88a3-78905d799664.png)
+
+
 
 ### DB
 - USERS : 회원 정보 스키마
@@ -97,4 +103,10 @@
 - BAKERIES: 베이커리 스키마  (개발 예정)
 - BAKERIES_COMMENT: 베이커리 댓글 스키마 (개발 예정)
 
+![erd](https://user-images.githubusercontent.com/91591854/141668288-1e76cf9d-d660-421a-a03f-f04e1881564d.jpg)
+
+
+
 ### UI 디자인
+![uidesign](https://user-images.githubusercontent.com/91591854/141668273-7ce2cd08-ecbb-47ab-8276-ce894647f4e0.jpg)
+
