@@ -2,7 +2,7 @@ import { Module, forwardRef } from '@nestjs/common';
 
 import { AuthService } from './auth.service';
 import { ConfigModule } from '@nestjs/config';
-import { JwtModule } from '@nestjs/jwt';
+import { JwtModule, JwtService } from '@nestjs/jwt';
 import { JwtRefreshAuthGuard } from './jwt/jwt-refresh.guard';
 import { JwtRefreshStrategy } from './jwt/jwt-refresh.strategy';
 import { JwtStrategy } from './jwt/jwt.strategy';
@@ -19,6 +19,6 @@ import { UserModule } from 'src/users/users.module';
     forwardRef(() => UserModule),
   ],
   providers: [AuthService, JwtStrategy, JwtRefreshStrategy],
-  exports: [AuthService],
+  exports: [AuthService, JwtModule],
 })
 export class AuthModule {}

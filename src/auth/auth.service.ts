@@ -7,19 +7,16 @@ import {
 } from '@nestjs/common';
 import { compare, hash } from 'bcrypt';
 
-import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { LoginRequestDto } from './dto/login.request.dto';
 import { Payload } from './jwt/jwt.payload';
 import { UsersRepository } from 'src/users/users.repository';
-import { catchError } from 'rxjs';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly usersRepository: UsersRepository,
     private jwtService: JwtService,
-    private configService: ConfigService,
   ) {}
 
   async jwtLogIn(data: LoginRequestDto) {
