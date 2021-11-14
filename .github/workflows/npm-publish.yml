@@ -30,10 +30,9 @@ jobs:
           cat << EOF >> .env
           ${{ secrets.ENV }}
           EOF
-      # tar파일 생성
       - name: Make tar file
         run: tar -cpvzf ./$GITHUB_SHA.tgz *
         shell: bash
           
-#       - run: npm ci
-#       - run: npm test
+      - run: npm ci
+      - run: npm test
