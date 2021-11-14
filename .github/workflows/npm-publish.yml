@@ -1,0 +1,73 @@
+name: Node.js CI
+
+# push, pull_request시 스크립트 로딩
+on:
+  push:
+    branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - name: delete package-lock.json
+        run: rm package-lock.json
+      - name: Install dependencies
+        run: npm install
+      - name: bulid file
+        run: npm run build
+      - name: Create env file
+        run: |
+          mkdir secret
+          cd secret
+          touch .env
+          cat << EOF >> .env
+          ${{ secrets.ENV }}
+          EOF
+          cd ../
+      # tar파일 생성
+      - name: Make tar file
+        run: tar -cpvzf ./$GITHUB_SHA.tgz *
+        shell: bash
+          
+#       - run: npm ci
+#       - run: npm test
+
+  publish-npm:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+          registry-url: https://registry.npmjs.org/
+      - run: npm ci
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+
+  publish-gpr:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+          registry-url: https://npm.pkg.github.com/
+      - run: npm ci
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
