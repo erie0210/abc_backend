@@ -1,4 +1,4 @@
-## [NestJS+RN: 풀스택] 빵 일기장(2021 가을 개발 진행중..)
+## [NestJS+RN: 풀스택] 빵 일기장(2021)
 
 ✨ FrontEnd Repository: https://github.com/erie0210/abc_frontend
 
